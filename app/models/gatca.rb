@@ -1,0 +1,2 @@
+class Gatca < ApplicationRecord
+end

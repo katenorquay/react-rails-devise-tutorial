@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gatcas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gatcas.each do |gatca| %>
+      <tr>
+        <td><%= link_to 'Show', gatca %></td>
+        <td><%= link_to 'Edit', edit_gatca_path(gatca) %></td>
+        <td><%= link_to 'Destroy', gatca, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gatca', new_gatca_path %>
