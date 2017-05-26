@@ -1,11 +1,31 @@
 var Welcome = React.createClass({
+  getInitialState: function() {
+    return {
+      page: 'login',
+      currentUser: null
+    }
+  },
+
+  changePage: function(newPage) {
+    this.setState({
+      page: newPage
+    })
+  },
+
+  updateCurrentUser: function(email) {
+    this.setState({
+      currentUser: email
+    })
+  },
+
   render: function() {
-    return (
-      <div>
-        <h1>Welcome!</h1>
-        <a href='/users/sign_up'>Sign Up!</a>
-        <a href='/users/sign_in'>Sign In!</a>
-      </div>
-    )
+    switch(this.state.page) {
+      case 'login':
+        return <Login changePage={this.changePage} updateCurrentUser={this.updateCurrentUser}/>
+      case 'signup':
+        return <Signup changePage={this.changePage} updateCurrentUser={this.updateCurrentUser}/>
+      case 'edit':
+        return <Edit changePage={this.changePage} currentUser={this.state.currentUser}/>
+    }
   }
 });
