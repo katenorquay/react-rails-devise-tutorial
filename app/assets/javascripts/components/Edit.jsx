@@ -8,10 +8,10 @@ var Edit = React.createClass({
 
   handleUpdate(e) {
     e.preventDefault()
-    const that = this
-    const userInfo = {
+    var that = this
+    var userInfo = {
       user: {
-        email: this.props.currentUser,
+        email: that.props.currentUser,
         password: document.getElementById('newPassword').value,
         password_confirmation: document.getElementById('confirmNewPassword').value,
       }
@@ -26,17 +26,19 @@ var Edit = React.createClass({
       dataType: 'json',
       data: userInfo,
       error: function (error) {
-        that.updateEdit(false)
+        console.log(error)
+        that.updateEdit('false')
       },
       success: function (res) {
-        that.updateEdit(true)
+        console.log(res)
+        that.updateEdit('true')
       },
     })
   },
 
-  updateEdit(bool) {
+  updateEdit(string) {
     this.setState({
-      editSuccessful: bool
+      editSuccessful: string
     })
   },
 
@@ -46,18 +48,24 @@ var Edit = React.createClass({
     })
   },
 
-  render: function() {
-    const { changePage, currentUser} = this.props
-    const errorClass = this.state.deleteUnsuccessful ? '' : 'hidden'
+  getEditData() {
     var customClass = 'hidden'
     var message = ''
-    if (this.state.editSuccessful) {
-      message = 'Password successfully updated'
-      customClass = ''
-    } else if (this.state.editSuccessful == false) {
-      message = 'There was an error updating your password'
-      customClass = ''
+    switch(this.state.editSuccessful) {
+      case 'true':
+        message = 'Password successfully updated'
+        customClass = ''
+        break;
+      case 'false':
+        message = 'There was an error updating your password'
+        customClass = ''
     }
+    return {message: message, customClass: customClass}
+  },
+
+  render: function() {
+    var errorClass = this.state.deleteUnsuccessful ? '' : 'hidden'
+    var editData = this.getEditData()
     return (
       <div>
         <h2>Edit Account</h2>
@@ -66,9 +74,9 @@ var Edit = React.createClass({
           <input id='confirmNewPassword' placeholder='retype new password'/>
           <button onClick={this.handleUpdate}>Submit</button>
         </form>
-        <p className={customClass}>{message}</p>
-        <Logout changePage={changePage}/>
-        <Delete changePage={changePage} updateDeleteError={this.updateDeleteError} currentUser={currentUser}/>
+        <p className={editData.customClass}>{editData.message}</p>
+        <Logout changePage={this.props.changePage}/>
+        <Delete changePage={this.props.changePage} updateDeleteError={this.updateDeleteError} currentUser={this.props.currentUser}/>
         <p className={errorClass}>Your account could not be deleted</p>
       </div>
     )

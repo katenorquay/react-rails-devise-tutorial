@@ -7,8 +7,7 @@ var Login = React.createClass({
 
   handleLogin(e) {
     e.preventDefault()
-    const { changePage, updateCurrentUser } = this.props
-    const that = this
+    var that = this
     var userInfo = {
       user: {
         email: document.getElementById('email').value,
@@ -25,8 +24,8 @@ var Login = React.createClass({
       },
       success: function (res) {
         console.log(res)
-        changePage('edit')
-        updateCurrentUser(res.email)
+        that.props.changePage('edit')
+        that.props.updateCurrentUser(res.email)
       },
     })
   },
@@ -38,8 +37,7 @@ var Login = React.createClass({
   },
 
   render() {
-    const errorClass = this.state.loginUnsuccessful ? '' : 'hidden'
-    const { changePage } = this.props
+    var errorClass = this.state.loginUnsuccessful ? '' : 'hidden'
     return (
       <div>
         <h2>Login</h2>
@@ -49,7 +47,7 @@ var Login = React.createClass({
           <button onClick={this.handleLogin}>Submit</button>
         </form>
         <p className={errorClass}>There was an error with your login details</p>
-        <button onClick={() => changePage('signup')}>Sign Up!</button>
+        <button onClick={() => this.props.changePage('signup')}>Sign Up!</button>
       </div>
     )
   }

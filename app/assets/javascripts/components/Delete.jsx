@@ -1,7 +1,7 @@
 var Delete = React.createClass({
 
   handleDelete(e) {
-    const { changePage, updateDeleteError, currentUser } = this.props
+    var that = this
     e.preventDefault()
     $.ajaxSetup({
        headers:
@@ -11,12 +11,12 @@ var Delete = React.createClass({
       type: "DELETE",
       url: "http://localhost:3000/users",
       dataType: 'json',
-      data: {user: { email: currentUser } },
+      data: {user: { email: that.props.currentUser } },
       error: function (error) {
-        updateDeleteError()
+        that.props.updateDeleteError()
       },
       success: function (res) {
-        changePage('login')
+        that.props.changePage('login')
       },
     })
 },

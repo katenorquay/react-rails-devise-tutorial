@@ -1,8 +1,8 @@
 var Logout = React.createClass({
 
   handleLogout(e) {
-    const { changePage } = this.props
     e.preventDefault()
+    var that = this
     $.ajax({
       type: "Delete",
       url: "http://localhost:3000/users/sign_out",
@@ -11,8 +11,7 @@ var Logout = React.createClass({
         console.log(error)
       },
       success: function (res) {
-        changePage('login')
-        
+        that.props.changePage('login')
       },
     })
   },
