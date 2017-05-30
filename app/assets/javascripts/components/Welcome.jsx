@@ -19,7 +19,8 @@ var Welcome = React.createClass({
   },
 
   render: function() {
-    switch(this.state.page) {
+    const { page, currentUser } = this.state
+    switch(page) {
       case 'login':
         return <Login changePage={this.changePage} updateCurrentUser={this.updateCurrentUser}/>
       case 'signup':

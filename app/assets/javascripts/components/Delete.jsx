@@ -1,15 +1,19 @@
 var Delete = React.createClass({
 
   handleDelete(e) {
-    const { changePage, currentUser } = this.props
+    const { changePage, updateDeleteError, currentUser } = this.props
     e.preventDefault()
+    $.ajaxSetup({
+       headers:
+       { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    });
     $.ajax({
       type: "DELETE",
       url: "http://localhost:3000/users",
       dataType: 'json',
       data: {user: { email: currentUser } },
       error: function (error) {
-        console.log(error)
+        updateDeleteError()
       },
       success: function (res) {
         changePage('login')
