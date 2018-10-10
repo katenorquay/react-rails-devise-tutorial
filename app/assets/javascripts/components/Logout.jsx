@@ -1,5 +1,4 @@
 var Logout = React.createClass({
-
   handleLogout(e) {
     e.preventDefault();
     var that = this;
@@ -7,18 +6,16 @@ var Logout = React.createClass({
       type: "Delete",
       url: "http://localhost:3000/users/sign_out",
       dataType: "json",
-      error: function (error) {
+      error: function(error) {
         console.log(error);
       },
-      success: function (res) {
+      success: function(res) {
         that.props.changePage("login");
-      },
+      }
     });
   },
 
   render: function() {
-    return (
-      <button onClick={this.handleLogout}>Sign Out</button>
-    );
-  };
+    return <button onClick={this.handleLogout}>Sign Out</button>;
+  }
 });

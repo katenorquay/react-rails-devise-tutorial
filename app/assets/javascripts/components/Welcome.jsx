@@ -3,7 +3,7 @@ var Welcome = React.createClass({
     return {
       page: "login",
       currentUser: null
-    }
+    };
   },
 
   changePage: function(newPage) {
@@ -19,13 +19,28 @@ var Welcome = React.createClass({
   },
 
   render: function() {
-    switch(this.state.page) {
+    switch (this.state.page) {
       case "login":
-        return <Login changePage={this.changePage} updateCurrentUser={this.updateCurrentUser}/>;
+        return (
+          <Login
+            changePage={this.changePage}
+            updateCurrentUser={this.updateCurrentUser}
+          />
+        );
       case "signup":
-        return <Signup changePage={this.changePage} updateCurrentUser={this.updateCurrentUser}/>;
+        return (
+          <Signup
+            changePage={this.changePage}
+            updateCurrentUser={this.updateCurrentUser}
+          />
+        );
       case "edit":
-        return <Edit changePage={this.changePage} currentUser={this.state.currentUser}/>;
+        return (
+          <Edit
+            changePage={this.changePage}
+            currentUser={this.state.currentUser}
+          />
+        );
     }
   }
 });
