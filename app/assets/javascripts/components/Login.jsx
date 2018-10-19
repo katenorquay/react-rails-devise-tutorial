@@ -13,19 +13,19 @@ var Login = React.createClass({
         email: document.getElementById("email").value,
         password: document.getElementById("password").value
       }
-    }
+    };
     $.ajax({
       type: "POST",
       url: "http://localhost:3000/users/sign_in",
       dataType: "json",
       data: userInfo,
-      error: function (error) {
+      error: (error) => {
         that.updateLoginError();
       },
-      success: function (res) {
+      success: (res) => {
         that.props.changePage("edit");
         that.props.updateCurrentUser(res.email);
-      },
+      }
     });
   },
 
@@ -36,18 +36,20 @@ var Login = React.createClass({
   },
 
   render() {
-    var errorClass = this.state.loginUnsuccessful ? "" : "hidden"
+    var errorClass = this.state.loginUnsuccessful ? "" : "hidden";
     return (
       <div>
         <h2>Login</h2>
         <form>
-          <input id="email" placeholder="email"/>
-          <input id="password" placeholder="password"/>
+          <input id="email" placeholder="email" />
+          <input id="password" placeholder="password" />
           <button onClick={this.handleLogin}>Submit</button>
         </form>
         <p className={errorClass}>There was an error with your login details</p>
-        <button onClick={() => this.props.changePage("signup")}>Sign Up!</button>
+        <button onClick={() => this.props.changePage("signup")}>
+          Sign Up!
+        </button>
       </div>
     );
-  };
+  }
 });
