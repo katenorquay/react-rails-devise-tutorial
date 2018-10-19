@@ -18,17 +18,17 @@ var Edit = React.createClass({
       }
     };
     $.ajaxSetup({
-      headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") }
+      headers: { "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content") }
     });
     $.ajax({
       type: "PUT",
       url: "http://localhost:3000/users",
       dataType: "json",
       data: userInfo,
-      error: function(error) {
+      error: (error) => {
         that.updateEdit("false");
       },
-      success: function(res) {
+      success: (res) => {
         that.updateEdit("true");
       }
     });

@@ -6,10 +6,10 @@ var Logout = React.createClass({
       type: "Delete",
       url: "http://localhost:3000/users/sign_out",
       dataType: "json",
-      error: function(error) {
+      error: (error) => {
         console.log(error);
       },
-      success: function(res) {
+      success: (res) => {
         that.props.changePage("login");
       }
     });

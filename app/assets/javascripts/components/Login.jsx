@@ -19,10 +19,10 @@ var Login = React.createClass({
       url: "http://localhost:3000/users/sign_in",
       dataType: "json",
       data: userInfo,
-      error: function(error) {
+      error: (error) => {
         that.updateLoginError();
       },
-      success: function(res) {
+      success: (res) => {
         that.props.changePage("edit");
         that.props.updateCurrentUser(res.email);
       }
